@@ -2,11 +2,16 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Image;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Termwind\Components\Li;
 
 class go extends Command
 {
@@ -29,8 +34,7 @@ class go extends Command
      */
     public function handle()
     {
-        $data = Post::find(3);
-        dd($data->like_profiles);
-//        dd(2312312);
+        $data = Comment::first();
+        dd($data->category);
     }
 }

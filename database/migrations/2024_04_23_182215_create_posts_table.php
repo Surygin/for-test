@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->text('content')->nullable();
-            $table->string('img_path')->nullable();
-            $table->string('preview_path')->nullable();
+//            $table->string('img_path')->nullable();
+//            $table->string('preview_path')->nullable();
             $table->foreignId('category_id')->index()->constrained('categories');
             $table->foreignId('profile_id')->index()->constrained('profiles');
-            $table->unsignedBigInteger('views');
+            $table->unsignedBigInteger('views')->nullable();
 
             $table->timestamps();
         });
