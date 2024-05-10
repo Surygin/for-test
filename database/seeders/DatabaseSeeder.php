@@ -16,14 +16,24 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-         User::factory()->create([
-             'name' => 'Super User',
-             'email' => 'anton@premier-partner.ru',
-             'password' => Hash::make('1234')
-         ]);
+        $user = User::firstOrCreate([
+            'email' => 'anton@premier-partner.ru'
+        ],
+            [
+                'name' => 'Super User',
+                'password' => Hash::make('1234')
+            ]);
 
-         $this->call([
+        $user->profile()->create([
+            'first_name' => fake()->name,
+            'second_name' => fake()->lastName,
+            'gender' => random_int(0, 1),
+            'is_married' => random_int(0, 1),
+            'birthed_at' => fake()->date('Y-m-d'),
+        ]);
 
-         ]);
+        $this->call([
+
+        ]);
     }
 }

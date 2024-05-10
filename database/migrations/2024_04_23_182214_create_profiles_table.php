@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('third_name')->nullable();
             $table->unsignedSmallInteger('gender');
             $table->boolean('is_married')->default('false');
-            $table->unsignedBigInteger('age')->nullable();
             $table->date('birthed_at');
             $table->foreignId('user_id')->index()->constrained('users');
 

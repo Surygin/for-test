@@ -11,6 +11,7 @@ use App\Models\Profile;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use Termwind\Components\Li;
 
 class go extends Command
@@ -34,7 +35,8 @@ class go extends Command
      */
     public function handle()
     {
-        $data = Comment::first();
-        dd($data->category);
+//        dd(Str::random(10));
+        $data = User::first();
+        dd($data->profile);
     }
 }
