@@ -28,15 +28,15 @@ class go extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'My command for tests';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-//        dd(Str::random(10));
-        $data = User::first();
-        dd($data->profile);
+        $profile = Profile::first();
+        dd($profile->likedComments);
+//        $profile->likedPosts()->toggle($profile->id);
     }
 }

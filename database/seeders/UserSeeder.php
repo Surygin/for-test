@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Super User',
                 'password' => Hash::make('1234')
-            ]);
+            ]
+        );
 
         $user->profile()->create([
             'first_name' => fake()->name,

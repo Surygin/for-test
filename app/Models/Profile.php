@@ -16,14 +16,14 @@ class Profile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function like_posts()
+    public function likedPosts()
     {
-        return $this->belongsToMany(Post::class, 'likes', 'profile_id');
+        return $this->morphedByMany(Post::class, 'likeable', 'likes');
     }
 
-    public function like_posts2()
+    public function likedComments()
     {
-        return $this->belongsToMany(Post::class, 'likes', 'profile_id');
+        return $this->morphedByMany(Comment::class, 'likeable', 'likes');
     }
 
     public function roles()
