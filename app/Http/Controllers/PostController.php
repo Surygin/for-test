@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\ShowResource;
+use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
+use http\Client\Response;
 use Illuminate\Http\Request;
+use PhpParser\Builder\Class_;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class PostController extends Controller
 {
@@ -30,19 +35,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(PostRequest $request)
     {
-        $post = [
-            'title' => 'title post',
-            'description' => 'description post',
-            'content' => 'Some content',
-            'img_path' => '1.jpg',
-            'preview_path' => '1min.jpg',
-            'category_id' => 2,
-            'profile_id' => 2,
-            'views' => 3
-        ];
-
+        $post = StoreResource::make($request)->resolve();
         Post::create($post);
 
         return http_response_code(200);
@@ -68,22 +63,12 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        $data = [
-            'title' => 'title post 2',
-            'description' => '2 description post',
-            'content' => 'Some content',
-            'img_path' => '2.jpg',
-            'preview_path' => '2min.jpg',
-            'category' => 'something',
-            'author' => 'admin',
-            'views' => 3
-        ];
-
+        $data = StoreResource::make($request)->resolve();
         $post->update($data);
 
-        return 'updated';
+        return http_response_code(200);
     }
 
     /**

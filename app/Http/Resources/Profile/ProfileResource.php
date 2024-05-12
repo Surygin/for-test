@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Profile;
 
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,8 +21,8 @@ class ProfileResource extends JsonResource
             'third_name' => $this->third_name,
             'gender' => $this->gender,
             'is_married' => $this->is_married,
-            'age' => $this->age,
             'birthed_at' => $this->birthed_at,
+            'user_id' => $this->user_id
         ];
     }
 }

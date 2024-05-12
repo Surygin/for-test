@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\Profile\ProfileResource;
 use App\Models\Profile;
 use App\Models\User;
@@ -31,20 +32,9 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
-//        dd(rand(1980, 2008) . '-' . rand(1, 12) . '-' . rand(1, 30));
-        $data = [
-            'first_name' => 'some first_name' . rand(1, 30),
-            'second_name' => 'second_name',
-            'third_name' => 'third_name',
-            'gender' => rand(0, 1),
-            'is_married' => rand(0, 1),
-            'age' => rand(18, 70),
-            'birthed_at' => rand(1980, 2008) . '-' . rand(1, 12) . '-' . rand(1, 30),
-            'user_id' => 4
-        ];
-
+        $data = ProfileResource::make($request)->resolve();
         Profile::create($data);
 
         return http_response_code(200);
@@ -55,6 +45,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
+        dd($profile);
         $profile = ProfileResource::make($profile)->resolve();
 
         return $profile;
@@ -73,16 +64,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        $data = [
-            'first_name' => 'new some first_name' . rand(1, 30),
-            'second_name' => 'second_name',
-            'third_name' => 'third_name',
-            'gender' => rand(0, 1),
-            'is_married' => rand(0, 1),
-            'age' => rand(18, 70),
-            'birthed_at' => rand(1980, 2008) . '-' . rand(1, 12) . '-' . rand(1, 30),
-        ];
-
+        $data = ProfileResource::make($request)->resolve();
         $profile->update($data);
 
         return 'Updated';

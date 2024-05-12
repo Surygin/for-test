@@ -35,8 +35,15 @@ class go extends Command
      */
     public function handle()
     {
-        $profile = Profile::first();
-        dd($profile->likedComments);
-//        $profile->likedPosts()->toggle($profile->id);
+        $i = 1;
+        while ($i <= 10):
+            $randomProfile = Profile::all()->random();
+            $randomPost = Post::all()->random();
+            $randomComment = Comment::all()->random();
+            $randomProfile->likedPosts()->toggle($randomPost->id);
+            $randomProfile->likedComments()->toggle($randomComment->id);
+            $i++;
+        endwhile;
+
     }
 }

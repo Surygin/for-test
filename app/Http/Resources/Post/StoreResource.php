@@ -5,7 +5,7 @@ namespace App\Http\Resources\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShowResource extends JsonResource
+class StoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,8 +19,7 @@ class ShowResource extends JsonResource
             'description' => $this->description,
             'content' => $this->content,
             'category_id' => $this->category_id,
-            'profile_id' => $this->profile_id,
-            'views' => $this->views
+            'profile_id' => $this->profile_id
         ];
     }
 }
