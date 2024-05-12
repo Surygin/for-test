@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryControler;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -22,3 +23,5 @@ Route::resource('roles', RoleController::class);
 Route::resource('comments', ProfileController::class);
 Route::resource('users', UserController::class);
 Route::resource('profiles', ProfileController::class);
+
+Route::patch('likes/posts/{post}', [LikeController::class, 'toggleLikePost'])->name('likeTogglePost');
