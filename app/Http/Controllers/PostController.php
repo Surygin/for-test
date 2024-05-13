@@ -15,9 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::cursorPaginate(10);
+        $posts = Post::all();
         $posts = IndexResource::collection($posts)->resolve();
-//        dd($posts);
         return $posts;
     }
 

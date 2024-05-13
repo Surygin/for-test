@@ -12,6 +12,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'content',
+        'profile_id',
+        'post_id',
+        'comment_id'
+    ];
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
