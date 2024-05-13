@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Post;
 
+use App\Http\Resources\Comment\CommentResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,7 +21,8 @@ class ShowResource extends JsonResource
             'content' => $this->content,
             'category_id' => $this->category_id,
             'profile_id' => $this->profile_id,
-            'views' => $this->views
+            'views' => $this->views,
+            'comments' => CommentResource::collection($this->comments)->resolve()
         ];
     }
 }

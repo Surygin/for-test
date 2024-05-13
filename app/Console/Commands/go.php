@@ -35,6 +35,9 @@ class go extends Command
      */
     public function handle()
     {
+        $data = Comment::first();
+        dd($data);
+
         $i = 1;
         while ($i <= 10):
             $randomProfile = Profile::all()->random();

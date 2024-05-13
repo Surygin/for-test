@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\Post\IndexResource;
+use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\ShowResource;
 use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
@@ -15,9 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        $posts = IndexResource::collection($posts)->resolve();
-        return $posts;
+//        $posts = Post::all();
+//        $posts = IndexResource::collection($posts)->resolve();
+        return new PostCollection(Post::paginate(10));
     }
 
     /**
@@ -44,9 +45,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $comments = $post->comments;
         $post = ShowResource::make($post)->resolve();
-        return compact('post', 'comments');
+        return compact('post');
     }
 
     /**
