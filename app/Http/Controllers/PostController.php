@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\ShowResource;
 use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
-use http\Client\Response;
-use Illuminate\Http\Request;
-use PhpParser\Builder\Class_;
-use PhpParser\Node\Expr\Cast\Object_;
-
 class PostController extends Controller
 {
     /**
@@ -19,8 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::cursorPaginate(10);
         $posts = IndexResource::collection($posts)->resolve();
+//        dd($posts);
         return $posts;
     }
 
@@ -38,7 +35,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = StoreResource::make($request)->resolve();
-        Post::create($post);
+        Post::create($post());
 
         return http_response_code(200);
     }
@@ -48,8 +45,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $comments = $post->comments;
         $post = ShowResource::make($post)->resolve();
-        return $post;
+        return compact('post', 'comments');
     }
 
     /**
