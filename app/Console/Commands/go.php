@@ -35,8 +35,11 @@ class go extends Command
      */
     public function handle()
     {
-        $data = Comment::first();
-        dd($data);
+//        $post = Post::all()->random();
+//        $tag = Tag::all()->random();
+//
+
+
 
         $i = 1;
         while ($i <= 10):
