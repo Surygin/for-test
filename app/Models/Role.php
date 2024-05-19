@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasObserver;
+use App\Traits\HasRelationLoger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger;
 
     protected $fillable = [
         'title'
@@ -18,4 +19,5 @@ class Role extends Model
     {
         return $this->belongsToMany(Profile::class);
     }
+
 }

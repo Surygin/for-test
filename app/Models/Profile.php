@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\HasObserver;
+use App\Traits\HasRelationLoger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Profile extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger;
 
     protected $fillable = [
         'first_name',

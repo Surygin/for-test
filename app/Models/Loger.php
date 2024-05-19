@@ -8,23 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Image extends Model
+class Loger extends Model
 {
-    use HasFactory, SoftDeletes, HasObserver;
+    use HasFactory;
+//    SoftDeletes, HasObserver
 
     protected $fillable = [
-        'url',
-        'imageable_type',
-        'imageable_id'
+       'operation_type', 'old_content', 'new_content'
     ];
-    public function imageable(): MorphTo
+    public function logerable(): MorphTo
     {
         return $this->morphTo();
     }
-
-    public function logers()
-    {
-        return $this->morphMany(Loger::class, 'logerable');
-    }
 }
-

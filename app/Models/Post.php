@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasObserver;
+use App\Traits\HasRelationLoger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,11 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Post extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger;
 
     protected $fillable = [
         'title',
@@ -34,11 +36,6 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-//    public function likedProfiles(): BelongsToMany
-//    {
-//        return $this->belongsToMany(Profile::class, 'likes', 'post_id');
-//    }
-
     public function likedProfiles()
     {
         return $this->morphToMany(Profile::class, 'likeable', 'likes');
@@ -53,4 +50,5 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
 }
