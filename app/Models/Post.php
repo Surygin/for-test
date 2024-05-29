@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Post extends Model
 {
@@ -49,6 +48,15 @@ class Post extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::retrieved(function ($model) {
+            $model->logers()->create([
+                    'operation_type' => 'read',
+                ]);
+        });
     }
 
 }

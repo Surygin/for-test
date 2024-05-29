@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostRequest;
-use App\Http\Resources\Comment\CommentResource;
-use App\Http\Resources\Post\IndexResource;
+use App\Http\Requests\Post\IndexRequest;
+use App\Http\Requests\Post\PostRequest;
 use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\ShowResource;
 use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
+
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
+        $data = $request->validated();
+        dd($data);
 //        $posts = Post::all();
 //        $posts = IndexResource::collection($posts)->resolve();
         return new PostCollection(Post::paginate(10));
