@@ -26,6 +26,8 @@ class Post extends Model
         'views'
     ];
 
+    protected $appends = ['some'];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -58,5 +60,10 @@ class Post extends Model
                     'operation_type' => 'read',
                 ]);
         });
+    }
+
+    public function getSomeAttribute()
+    {
+        return 123123123123123;
     }
 }

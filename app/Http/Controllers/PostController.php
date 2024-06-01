@@ -18,11 +18,10 @@ class PostController extends Controller
     {
         $data = $request->validated();
         $posts = Post::filter($data)->get();
-//        dd($posts);
-//        $posts = Post::all();
-//        $posts = IndexResource::collection($posts)->resolve();
-        return new PostCollection(Post::paginate(10));
+        return $posts;
+//        return new PostCollection(Post::paginate(10));
     }
+
 
     /**
      * Show the form for creating a new resource.
