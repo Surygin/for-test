@@ -17,7 +17,8 @@ class PostController extends Controller
     public function index(IndexRequest $request)
     {
         $data = $request->validated();
-        dd($data);
+        $posts = Post::filter($data)->get();
+//        dd($posts);
 //        $posts = Post::all();
 //        $posts = IndexResource::collection($posts)->resolve();
         return new PostCollection(Post::paginate(10));

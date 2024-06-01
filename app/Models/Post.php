@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasFilter;
 use App\Traits\HasObserver;
 use App\Traits\HasRelationLoger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger;
+    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger, HasFilter;
 
     protected $fillable = [
         'title',
@@ -58,5 +59,4 @@ class Post extends Model
                 ]);
         });
     }
-
 }

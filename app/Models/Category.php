@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasFilter;
 use App\Traits\HasObserver;
 use App\Traits\HasRelationLoger;
 use App\Traits\ObserverTrait;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger;
+    use HasFactory, SoftDeletes, HasObserver, HasRelationLoger, HasFilter;
 
     protected $fillable = [
         'title',
