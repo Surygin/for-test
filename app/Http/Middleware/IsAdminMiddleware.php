@@ -20,6 +20,6 @@ class IsAdminMiddleware
         }
         return response([
             'message' => 'forbidden'
-        ], 403);
+        ], \Illuminate\Http\Response::HTTP_FORBIDDEN);
     }
 }
