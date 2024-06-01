@@ -7,6 +7,9 @@ use App\Traits\HasRelationLoger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -39,7 +42,7 @@ class Profile extends Model
         return $this->morphedByMany(Comment::class, 'likeable', 'likes');
     }
 
-    public function roles()
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
     }
@@ -47,5 +50,10 @@ class Profile extends Model
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable'); //, 'recordable_type', 'recordable_id'
+    }
+
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->roles->contains('title', 'Администратор');
     }
 }

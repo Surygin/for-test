@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CategoryControler;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
@@ -8,14 +9,27 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Middleware\IsAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', [AuthController::class, 'login']);
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class. 'refresh']);
+    Route::post('me', [AuthController::class, 'me']);
 });
 
-Route::resource('posts', PostController::class);
+//Route::group(['middleware' => 'jwt.auth'],function (){
+//
+//})->middleware([
+//    IsAdminMiddleware::class
+//]);
+
+Route::resource('posts', PostController::class)->middleware([
+    'jwt.auth',
+    IsAdminMiddleware::class
+]);
+
 Route::resource('categories', CategoryControler::class);
 Route::resource('tags', TagController::class);
 Route::resource('comments', CommentController::class);
