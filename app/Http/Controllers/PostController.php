@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\IndexRequest;
 use App\Http\Requests\Post\PostRequest;
-use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\ShowResource;
 use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
