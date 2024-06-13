@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\User\UserResource;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Role\RoleResource;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = User::all();
-        $users = UserResource::collection($data)->resolve();
-        return $users;
+        $roles = Role::all();
+        $roles = RoleResource::collection($roles)->resolve();
+
+        return $roles;
     }
 
     /**
@@ -31,8 +33,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = UserResource::make($request)->resolve();
-        User::create($data);
+        $data = RoleResource::make($request)->resolve();
+
+        Role::create($data);
 
         return http_response_code(200);
     }
@@ -40,11 +43,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Role $role)
     {
-        $data = UserResource::make($user)->resolve();
+        $role = RoleResource::make($role)->resolve();
 
-        return $data;
+        return $role;
     }
 
     /**
@@ -58,19 +61,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Role $role)
     {
-        $data = UserResource::make($request)->resolve();
-        $user->update($data);
+        $data = RoleResource::make($request)->resolve();
+
+        $role->update($data);
+
         return http_response_code(200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Role $role)
     {
-        $user->delete();
+        $role->delete();
+
         return http_response_code(200);
     }
 }

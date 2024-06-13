@@ -2,43 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Post\IndexRequest;
-use App\Http\Requests\Post\PostRequest;
+use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\ShowResource;
-use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexRequest $request)
+    public function index()
     {
-        $data = $request->validated();
-        $posts = Post::filter($data)->get();
-        return $posts;
-//        return new PostCollection(Post::paginate(10));
+        $posts = Post::get();
+        $posts = IndexResource::collection($posts)->resolve();
+//        dd($posts);
+        return inertia('Post/Index', compact('posts'));
     }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-//    public function create()
-//    {
-//        //
-//    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PostRequest $request)
+    public function store(Request $request)
     {
-        $post = StoreResource::make($request)->resolve();
-        Post::create($post());
-
-        return http_response_code(200);
+        //
     }
 
     /**
@@ -47,36 +34,22 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post = ShowResource::make($post)->resolve();
-        return compact('post');
+        return inertia('Post/Show', compact('post'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-//    public function edit(string $id)
-//    {
-//        //
-//    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(Request $request, string $id)
     {
-        $data = StoreResource::make($request)->resolve();
-        $post->update($data);
-
-        return http_response_code(200);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(string $id)
     {
-        $id = $post->id;
-        $post->delete();
-        return 'Post ' . $id . ' - deleted';
+        //
     }
-
 }
