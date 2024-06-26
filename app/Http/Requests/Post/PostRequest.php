@@ -38,18 +38,4 @@ class PostRequest extends FormRequest
             'profile_id.required' => 'Пользователь должна быть выбрана',
         ];
     }
-
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'title' => ucwords($this->get('title')),
-        ]);
-    }
-
-    protected function passedValidation()
-    {
-        $this->merge([
-            'description' => strtolower($this->get('description')),
-        ]);
-    }
 }

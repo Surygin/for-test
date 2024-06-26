@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\Tag\TagResource;
 use App\Traits\HasFilter;
 use App\Traits\HasObserver;
 use App\Traits\HasRelationLoger;
@@ -53,17 +54,4 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    protected static function booted(): void
-    {
-        static::retrieved(function ($model) {
-            $model->logers()->create([
-                    'operation_type' => 'read',
-                ]);
-        });
-    }
-
-    public function getSomeAttribute()
-    {
-        return 123123123123123;
-    }
 }

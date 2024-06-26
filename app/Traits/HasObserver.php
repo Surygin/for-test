@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Loger;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 
 trait HasObserver
 {
@@ -42,7 +43,7 @@ trait HasObserver
 //            });
         });
 
-        static::deleting(function ($model) {
+        static::deleted(function ($model) {
             $model->logers()->create([
                 'operation_type' => 'delete',
                 'old_content' => json_encode($model->getOriginal()),

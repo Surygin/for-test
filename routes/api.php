@@ -22,17 +22,10 @@ Route::group([], function () {
     IsAdminMiddleware::class
 ]);
 
-//Route::group(['middleware' => 'jwt.auth'],function (){
-//
-//})->middleware([
-//    IsAdminMiddleware::class
-//]);
-
 Route::resource('posts', PostController::class)->middleware([
     'jwt.auth',
     IsAdminMiddleware::class
 ]);
-//Route::resource('posts', PostController::class);
 
 Route::resource('categories', CategoryControler::class);
 Route::resource('tags', TagController::class);

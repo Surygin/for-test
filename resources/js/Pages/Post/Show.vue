@@ -65,8 +65,8 @@ export default {
 
 
 <style scoped>
-.tag__item:before{
-    content: '#';
-    color: #6b7280;
-}
+    .tag__item:before{
+        content: '#';
+        color: #6b7280;
+    }
 </style>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\IndexRequest;
 use App\Http\Requests\Post\PostRequest;
+use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\ShowResource;
 use App\Http\Resources\Post\StoreResource;
 use App\Models\Post;
@@ -18,8 +19,7 @@ class PostController extends Controller
     {
         $data = $request->validated();
         $posts = Post::filter($data)->get();
-        return $posts;
-//        return new PostCollection(Post::paginate(10));
+        return IndexResource::collection($posts)->resolve();
     }
 
 

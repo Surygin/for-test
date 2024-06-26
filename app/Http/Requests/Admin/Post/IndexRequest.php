@@ -30,7 +30,15 @@ class IndexRequest extends FormRequest
             'views_from' => 'nullable|integer',
             'views_to' => 'nullable|integer',
             'created_at_from' => 'nullable|date_format:Y-m-d',
-            'created_at_to' => 'nullable|date_format:Y-m-d'
+            'created_at_to' => 'nullable|date_format:Y-m-d',
+            'page' => 'nullable|integer'
         ];
+    }
+
+    protected function passedValidation()
+    {
+        return $this->merge([
+            'page' => $this->page ?? 1
+        ]);
     }
 }
